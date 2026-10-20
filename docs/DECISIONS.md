@@ -49,3 +49,13 @@ Decisión: incorporar E10/S06/S07 y usar CONFIRMADO, PROVISIONAL y NO RESUELTO p
 Motivo: nuevas fuentes primarias y contraste independiente de hipótesis; ver [validación](SEMANTIC_VALIDATION.md) y [fuentes](DATA_SOURCES.md). Alternativas descartadas: asumir quantity/price/brand por analogía, deduplicar o alinear cortas porque tres imputaciones de vacíos resultan iguales. Igual resultado de valores no identifica la procedencia de la ausencia.
 
 Se documentan escenarios A/B/C sin ejecutarlos ni escoger supuesto. GO CON CONDICIONES exclusivamente conceptual; NO GO para KPIs o modelo definitivo hasta cerrar cada requisito. No se cierra Data Engineering. Se justificaron antes de editar los cambios mínimos de README y referencias de AGENTS/COPYRIGHT, para evitar contradicciones sobre acceso y permisos. La auditoría y el estado históricos se conservan identificados como antecedentes. Cambios únicamente locales, sin commit/push; ningún cambio al pipeline, pruebas, datos ni configuración Git.
+
+## 2026-10-20 — Capa técnica de evidencia SQLite
+
+Autorización posterior: implementar una capa independiente de normalización v1 con SQLite/biblioteca estándar; añadir módulo, CLI y pruebas nuevos sin modificar código ni pruebas anteriores. Modelo técnico: archivo, ocurrencia, campo original posicional, línea vacía, manifiesto de importación y propiedades de calidad. No incluir hipótesis semánticas en el núcleo: no existe contrato ejecutable validado.
+
+Decisión: reconstruir fuente/hash desde raw_text, terminadores y líneas vacías; recalcular todos los agregados de quality.json. Cargar transaccionalmente en staging, publicar por enlace exclusivo y rechazar destinos distintos. Una repetición compara esquema y todas las tablas contra una carga nueva, sin confiar solo en manifiestos. No deduplicar, alinear ni convertir valores en tipos comerciales. Identidad técnica no equivale a autenticidad externa.
+
+Alternativas descartadas: cargar JSON sin validar contenido, usar INSERT OR IGNORE que oculte pérdidas, sobrescribir una base existente o importar el pipeline como validador del cargador. El esquema conserva texto y estados inválidos documentados por v1; un registro inválido preservado no es una entrada JSON incompatible.
+
+Consecuencias: espacio adicional para staging y costo de una carga completa al repetir; memoria proporcional a textos distintos; requiere enlaces duros y uso sin escritores concurrentes. Bases/auxiliares/staging excluidos de Git. No se amplían permisos de datos ni se aprueban KPIs; Data Engineering y validación semántica siguen abiertos. Procedimiento y límites en [EVIDENCE_SQLITE.md](EVIDENCE_SQLITE.md).

@@ -2,15 +2,15 @@
 
 ## Estado vigente — 2026-10-20
 
-Objetivo autorizado: corrección de cinco hallazgos de coherencia y reproducibilidad documental; Aurelia Jewelry es ficticia. Data Engineering no está cerrado. Normalización v1 aprobada con 39 pruebas históricas, sin nueva ejecución en esta etapa documental. Validación semántica abierta; GO CON CONDICIONES para revisión conceptual y NO GO para modelo definitivo/KPIs comerciales.
+Objetivo autorizado: implementación de capa técnica SQLite sobre records.jsonl y quality.json de normalización v1. No es un modelo analítico comercial. Aurelia Jewelry es ficticia. Data Engineering y validación semántica siguen abiertos; GO CON CONDICIONES para revisión conceptual y NO GO para KPIs/modelo comercial definitivo.
 
-Completado: actualización de diccionario, registro E10/S06/S07, procedencia/condiciones, matriz de 14 capacidades, decisiones y escenarios A/B/C. Ajustes mínimos de coherencia en README, AGENTS, COPYRIGHT y aviso de vigencia en DATA_AUDIT; PIPELINE permanece intacto. Los bloques anteriores se conservan abajo como historial y no sustituyen este estado vigente.
+Implementado: src/evidence_sqlite.py con CLI load/query, seis tablas técnicas, validación del contrato v1, reconstrucción del hash fuente, recálculo de calidad, transacción/staging y publicación exclusiva. Idempotencia por comparación lógica completa sin sobrescribir destino distinto. No alinear cortas, deduplicar ni tipar negocios; hipótesis semánticas fuera del núcleo. Nuevos tests/runner separados de la suite v1. Instrucciones en [EVIDENCE_SQLITE.md](EVIDENCE_SQLITE.md).
 
-Confirmado: 95.911 ocurrencias, 90.559 largas, 5.352 cortas, 2.589 excedentes preservados. Fuente declara producto comprado por fila con order_id; sin encabezado posicional. Tres omisiones equivalentes no resueltas. Uso gratuito y atribución publicados; redistribución y otros usos no resueltos. Versión pública actual 2; correspondencia local exacta PROVISIONAL.
+Los datos oficiales conservan 95.911 ocurrencias, 90.559 largas, 5.352 cortas y 2.589 excedentes. Base local prevista: data/evidence/jewelry.sqlite, excluida de Git junto con auxiliares y staging. La base contiene evidencia sensible: no publicar base ni consultas de registros. Código, pruebas anteriores, pipeline y archivos oficiales permanecen intactos; nuevas pruebas usan fixtures temporales y copias de salida independientes.
 
-Próximo paso: revisión/aprobación documental; después solicitar contrato de extracción, diccionario y reglas monetarias al responsable de la fuente (sin contactos enviados). Prioridad P0: esquema/multiplicidad/importe; P1: identidad/cobertura/permisos; P2: atributos. Escenario B mantiene diagnóstico técnico si no llega información. Ningún escenario se ejecutó.
+Persisten bloqueos P0: encabezado por anchura, clave de línea, cantidad/multiplicidad, importe/moneda/estados; P1: identidad/cobertura/permisos y mapeo de edición 2873760; P2: códigos/atributos. La capa permite trazabilidad y calidad, no resuelve esos significados.
 
-Verificaciones de esta etapa: véase cierre documental al final. No se realizaron commits, push, instalación, deduplicación, alineación, cálculos comerciales hipotéticos, dashboards o modelos. Los cambios quedan locales pendientes de revisión.
+Próximo paso: única evaluación funcional de la implementación local según EVIDENCE_SQLITE.md. Sin commit ni push; la autorización actual cubre desarrollo y validación, no publicación. Resultados ejecutados en el cierre de esta etapa al final; las secciones siguientes son antecedentes fechados.
 
 ## Historial anterior (estados fechados)
 
@@ -195,3 +195,37 @@ La matriz conserva 14 capacidades con un estado único por fila; los perfiles po
 Verificaciones: bloque Python extraído del comando documentado y reejecutado con resultado idéntico y código 0; git diff revisado y git diff --check sin errores; enlaces internos/ancla E10 y escaneo por patrones sin hallazgos; 17 archivos protegidos con el mismo manifiesto fa5f54d43ce4f15d08fc0243335904781c780d3758a12e655cc8bc6898cf2999. Escenarios A/B/C sin modificaciones; C sigue hipotético y no ejecutado. No se reejecutó suite QA ni pipeline, ni se instalaron dependencias o cambió configuración Git. Comprobaciones documentales no equivalen a cierre semántico.
 
 Dictamen para revisión: APROBADO para un futuro commit exclusivamente documental; los cambios siguen locales y requieren revisión del usuario. Data Engineering y validación semántica siguen abiertos. Persisten los bloqueos P0/P1/P2 del estado vigente. No se creó commit ni se hizo push.
+
+## Cierre funcional de capa SQLite — 2026-10-20
+
+Comandos ejecutados con el intérprete preexistente, reemplazando python por su ejecutable local (sin instalar):
+
+```powershell
+python -B tests/run_evidence_suite.py
+python -B tests/run_suite.py
+python -B src/evidence_sqlite.py load --records data/processed/normalization-v1/records.jsonl --quality data/processed/normalization-v1/quality.json --database data/evidence/jewelry.sqlite
+python -B src/evidence_sqlite.py query --database data/evidence/jewelry.sqlite --query summary
+python -B src/evidence_sqlite.py query --database data/evidence/jewelry.sqlite --query multiplicity
+```
+
+Suite final nueva: **27 pruebas en 76.464 s**, código 0; `EVIDENCE_QA tests=27 failures=0 errors=0 skipped=0` (26 unitarias y una integración real). Suite v1 sin modificaciones: **39 pruebas en 37.645 s**, código 0; `QA_RESULT tests=39 failures=0 errors=0 skipped=0`. Las duraciones corresponden a esta ejecución, con procesos simultáneos; no son benchmark ni SLA. Se ejecutaron unitarias durante desarrollo, detectando y corrigiendo cierre de conexiones en Windows; el resultado final citado corresponde al código final, incluyendo consulta de anchuras mixtas invalid_csv/parseable.
+
+| Evidencia real | Resultado |
+|---|---:|
+| Ocurrencias | 95.911 |
+| Anchura 13 / 11 | 90.559 / 5.352 |
+| Campos originales almacenados | 1.236.139 |
+| Grupos repetidos | 2.298 |
+| Excedentes repetidos | 2.589 |
+| Ocurrencias involucradas en repeticiones | 4.887 |
+| Base local SQLite | 293.298.176 bytes |
+
+Integración: comparación de todas las ocurrencias/campos con JSONL oficial, todas las propiedades de quality, dos cargas independientes lógicamente iguales y recarga idempotente; integridad SQLite y referencial sin hallazgos. Fuentes/reportes incompletos o alterados y fallos controlados rechazados sin base parcialmente aceptada. CLI real: load creó base y su repetición devolvió unchanged con bytes de base intactos; summary/multiplicity verificaron los conteos anteriores. quality y record contrastados contra entradas por subprocess, sin imprimir registros individuales.
+
+17 archivos anteriores protegidos (raw, processed, src/tests previos, tools y PIPELINE.md), incluidos cachés preexistentes: hashes idénticos; manifiesto conservado fa5f54d43ce4f15d08fc0243335904781c780d3758a12e655cc8bc6898cf2999. Se verificó además identidad con HEAD del código, tests, tools y PIPELINE previos. Datos oficiales: CSV SHA-256 09d8a61644f66cbb9ad8c50f59180978a0995d121196faf25ef28083dd7b84a2; records 5eef0df67a63c918b23a5d01627d6debfd88937c7f499e5b4bc25322bbff63e8; quality d58407f19d6f3727866ce2ec7674756da7a1a96624f0f5aac74e4c070fefe129.
+
+Nuevos: src/evidence_sqlite.py, tests/test_evidence_sqlite.py, tests/run_evidence_suite.py y docs/EVIDENCE_SQLITE.md. Modificados: .gitignore, AGENTS.md, README.md, docs/DECISIONS.md y este STATUS. Base generada solo en data/evidence, fuera de salidas oficiales y excluida. No se modificó ningún archivo previo de src/tests, ni pipeline ni datos oficiales. Las bases de integración se generaron y eliminaron con TemporaryDirectory; la base local consultable se conserva intencionalmente.
+
+Verificaciones finales: git diff --check código 0; enlaces internos y escaneo por patrones sin hallazgos de secretos, IDs individuales o rutas personales; exclusiones de base, journal/WAL/SHM y staging confirmadas con git check-ignore. Git solo muestra los nueve archivos de implementación/documentación anteriores; sin staging, commit, push, configuración global o publicación. No se incorporaron datasets a los archivos publicables. El escaneo por patrones no certifica ausencia absoluta de secretos.
+
+Implementación lista para una única evaluación funcional; sin bloqueos funcionales identificados dentro del alcance probado. Límites: enlaces duros requeridos, memoria proporcional a textos distintos, espacio extra para staging/recarga, operación sin escritores concurrentes, sin prueba física de ACL/disco lleno/corte eléctrico. No se promete durabilidad del directorio ante corte de energía. Data Engineering sigue abierto, igual que validación semántica; no se aprobaron cantidades, ingresos, clientes, KPIs, dashboards o modelos.

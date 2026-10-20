@@ -10,6 +10,7 @@ El proyecto demuestra cómo auditar una fuente de comercio electrónico, conserv
 |---|---|
 | Auditoría técnica | Archivo local recorrido completamente; calidad, estructura y procedencia documentadas |
 | Normalización estructural v1 | **Aprobada**, con evidencia histórica de 39 pruebas y reproducibilidad byte a byte |
+| Evidencia técnica SQLite | Capa local consultable, independiente de v1; pruebas y ejecución en EVIDENCE_SQLITE.md |
 | Diccionario y validación semántica | Documentación preliminar disponible; **validación abierta** |
 | Modelado analítico | **GO CON CONDICIONES** para revisión conceptual; sin implementación definitiva |
 | KPIs comerciales definitivos | **NO GO** hasta resolver los bloqueos pertinentes |
@@ -66,6 +67,7 @@ jewelry-commerce-intelligence-platform/
 - [Auditoría técnica](docs/DATA_AUDIT.md).
 - [Procedencia y condiciones de uso](docs/DATA_SOURCES.md).
 - [Pipeline, contrato y pruebas](docs/PIPELINE.md).
+- [Capa técnica SQLite: ejecución, consultas y pruebas](docs/EVIDENCE_SQLITE.md).
 - [Diccionario preliminar de 13 posiciones](docs/DATA_DICTIONARY.md).
 - [Validación semántica y cuestiones pendientes](docs/SEMANTIC_VALIDATION.md).
 - [Viabilidad de indicadores y modelo conceptual](docs/ANALYTICS_FEASIBILITY.md).
@@ -84,7 +86,7 @@ La fuente analizada es REES46 Jewelry Store Purchase History. Referencias primar
 
 Siguen pendientes el encabezado oficial de la edición, la unidad física y clave de línea comercial, el papel de ciertos códigos, la moneda, precio unitario frente a importe, persistencia de identidad y causa de las repeticiones. La fuente declara un producto comprado por fila y agrupación por order_id; no confirma sus posiciones locales, cantidad ni pago. La aprobación del pipeline es estructural y no resuelve esos puntos.
 
-No hay dashboards, SQL, API ni modelos de Machine Learning implementados. El próximo paso es obtener evidencia primaria para resolver las preguntas semánticas y revisar el modelo conceptual; no convertir hipótesis en KPIs de ventas, clientes, rentabilidad o RFM.
+La capa SQLite incluye únicamente SQL técnico de evidencia. No hay dashboards, modelo SQL comercial, API ni modelos de Machine Learning implementados. El próximo paso es obtener evidencia primaria para resolver las preguntas semánticas y revisar el modelo conceptual; no convertir hipótesis en KPIs de ventas, clientes, rentabilidad o RFM.
 
 ## Derechos y portfolio
 

@@ -7,10 +7,10 @@
 - Mantener este proyecto independiente; no copiar código ni incorporar archivos de otros proyectos.
 - La normalización estructural v1 está aprobada con 39 pruebas históricas. Su código, pruebas y salidas oficiales están congelados para la fase actual.
 - La validación semántica permanece abierta: GO CON CONDICIONES para revisión conceptual; NO GO para modelo definitivo o KPIs comerciales hasta resolver los bloqueos pertinentes.
-- Alcance actual: consolidar documentación de Data Engineering y escenarios semánticos; no implementar el modelo analítico definitivo. El portfolio corresponde a PaulaCe3. Código y materiales originales de PLATHEL con derechos reservados, sin licencia open source; véase COPYRIGHT.md. REES46 conserva sus derechos y condiciones propios.
+- Alcance actual autorizado: capa técnica SQLite independiente de v1, CLI, nuevas pruebas y documentación; no implementar el modelo analítico definitivo. El portfolio corresponde a PaulaCe3. Código y materiales originales de PLATHEL con derechos reservados, sin licencia open source; véase COPYRIGHT.md. REES46 conserva sus derechos y condiciones propios.
 - No modificar data/raw/, data/processed/, src/ ni tests/ sin una autorización posterior que amplíe el alcance. No descargar datasets, inventar datos ni instalar dependencias.
 - No inicializar Git, crear commits, remotos o repositorios ni hacer push hasta recibir autorización explícita. La decisión de publicar no autoriza por sí sola esos pasos.
-- No implementar dashboards, SQL, API, ML u otras aplicaciones, ni forzar la alineación de las filas cortas.
+- Solo SQL técnico de evidencia en la capa SQLite autorizada. No implementar dashboards, SQL comercial, API, ML u otras aplicaciones, ni forzar la alineación de las filas cortas.
 - Nunca versionar datasets originales o procesados. Conservar las exclusiones de `.gitignore`.
 - No publicar secretos, registros individuales, identificadores de clientes, URLs firmadas o rutas personales. La documentación pública puede conservar esquema y resultados agregados de auditoría, sin muestras de registros.
 
