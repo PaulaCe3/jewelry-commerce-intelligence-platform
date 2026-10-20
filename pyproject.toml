@@ -1,0 +1,10 @@
+[project]
+name = "jewelry-commerce-intelligence-platform"
+version = "0.1.0"
+description = "Caso profesional de consultoría de datos para PLATHEL y la empresa ficticia Aurelia Jewelry."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+# Configuración inicial: sin backend de construcción ni herramientas adicionales.
+# Las dependencias se definirán cuando exista una implementación autorizada.
