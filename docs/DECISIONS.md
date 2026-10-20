@@ -41,3 +41,11 @@ Decisión: presentar el estado actual en README, retirar rutas personales y deta
 Se reforzaron exclusiones de datos reubicados, procesados, archivos comprimidos, credenciales, logs, cachés y configuración local. Los marcadores .gitkeep existentes se mantienen. Las plantillas de entorno futuras se excluyen por defecto hasta revisión explícita. Alternativa descartada: confiar solamente en la ubicación actual del dataset o en que un archivo «de ejemplo» no contiene credenciales.
 
 Límites expresos de autorización: no modificar datos, src o tests; no instalar dependencias; no inicializar Git, crear commits/repositorios ni hacer push. La preparación no implica que exista un remoto ni que se haya aprobado el cierre semántico. La identidad pública de commits se elegirá al autorizar la inicialización; se recomienda email noreply configurado solo en este repositorio para no alterar otros proyectos.
+
+## 2026-10-20 — Consolidación documental y puertas semánticas
+
+Decisión: incorporar E10/S06/S07 y usar CONFIRMADO, PROVISIONAL y NO RESUELTO por afirmación; conservar por separado hechos técnicos y significado comercial. S06 resuelve granularidad declarada, asociación slug/ID y condiciones publicadas; no resuelve posiciones, cantidad, moneda, pago ni mapeo de edición interna a pública. Las tres omisiones equivalentes permanecen sin selección y los 2.589 excedentes se preservan.
+
+Motivo: nuevas fuentes primarias y contraste independiente de hipótesis; ver [validación](SEMANTIC_VALIDATION.md) y [fuentes](DATA_SOURCES.md). Alternativas descartadas: asumir quantity/price/brand por analogía, deduplicar o alinear cortas porque tres imputaciones de vacíos resultan iguales. Igual resultado de valores no identifica la procedencia de la ausencia.
+
+Se documentan escenarios A/B/C sin ejecutarlos ni escoger supuesto. GO CON CONDICIONES exclusivamente conceptual; NO GO para KPIs o modelo definitivo hasta cerrar cada requisito. No se cierra Data Engineering. Se justificaron antes de editar los cambios mínimos de README y referencias de AGENTS/COPYRIGHT, para evitar contradicciones sobre acceso y permisos. La auditoría y el estado históricos se conservan identificados como antecedentes. Cambios únicamente locales, sin commit/push; ningún cambio al pipeline, pruebas, datos ni configuración Git.

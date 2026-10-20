@@ -69,19 +69,20 @@ jewelry-commerce-intelligence-platform/
 - [Diccionario preliminar de 13 posiciones](docs/DATA_DICTIONARY.md).
 - [Validación semántica y cuestiones pendientes](docs/SEMANTIC_VALIDATION.md).
 - [Viabilidad de indicadores y modelo conceptual](docs/ANALYTICS_FEASIBILITY.md).
+- [Escenarios y criterios de desbloqueo](docs/SEMANTIC_SCENARIOS.md).
 - [Decisiones y límites autorizados](docs/DECISIONS.md).
 
 Las mediciones y resultados completos corresponden a ejecuciones documentadas sobre el archivo auditado, no a garantías universales de rendimiento ni a una nueva ejecución automática en GitHub.
 
 ## Fuente y límites de uso
 
-La fuente analizada es REES46 Jewelry Store Purchase History. Referencias primarias: [catálogo de datos REES46](https://data.rees46.com/), [datasets REES46](https://rees46.com/en/datasets) y [ficha Kaggle candidata](https://www.kaggle.com/datasets/mkechinov/ecommerce-purchase-history-from-jewelry-store). El vínculo de edición y sus límites se explican en DATA_SOURCES.md; la licencia específica no se considera verificada.
+La fuente analizada es REES46 Jewelry Store Purchase History. Referencias primarias: [catálogo de datos REES46](https://data.rees46.com/), [datasets REES46](https://rees46.com/en/datasets) y [ficha Kaggle identificada](https://www.kaggle.com/datasets/mkechinov/ecommerce-purchase-history-from-jewelry-store). El vínculo de edición y sus límites se explican en DATA_SOURCES.md; se verificaron la etiqueta de derechos y las condiciones publicadas de uso gratuito y atribución; el alcance de redistribución y usos comerciales adicionales continúa sin resolver.
 
 **Este repositorio no distribuye datasets, registros individuales, muestras de clientes ni datos procesados de REES46.** Los informes conservan esquema, metodología y resultados agregados de calidad. Aurelia Jewelry es ficticia y no posee los datos; no se afirma relación comercial con la tienda original, REES46 o Kaggle.
 
 ## Limitaciones actuales y próximos pasos
 
-Siguen pendientes el encabezado oficial de la edición, la granularidad comercial, el papel de ciertos códigos, la moneda, precio unitario frente a importe, persistencia de identidad y causa de las repeticiones. La aprobación del pipeline es estructural y no resuelve esos puntos.
+Siguen pendientes el encabezado oficial de la edición, la unidad física y clave de línea comercial, el papel de ciertos códigos, la moneda, precio unitario frente a importe, persistencia de identidad y causa de las repeticiones. La fuente declara un producto comprado por fila y agrupación por order_id; no confirma sus posiciones locales, cantidad ni pago. La aprobación del pipeline es estructural y no resuelve esos puntos.
 
 No hay dashboards, SQL, API ni modelos de Machine Learning implementados. El próximo paso es obtener evidencia primaria para resolver las preguntas semánticas y revisar el modelo conceptual; no convertir hipótesis en KPIs de ventas, clientes, rentabilidad o RFM.
 
@@ -89,4 +90,4 @@ No hay dashboards, SQL, API ni modelos de Machine Learning implementados. El pr�
 
 Código y materiales originales de **PLATHEL**, con derechos reservados, **sin licencia open source**. Véase [COPYRIGHT.md](COPYRIGHT.md). El aviso no atribuye derechos sobre REES46 ni sobre materiales de terceros.
 
-Cuenta prevista para alojar el portfolio público: [PaulaCe3](https://github.com/PaulaCe3). Este documento no afirma que el repositorio remoto ya exista o haya sido publicado.
+Repositorio de portfolio: [PaulaCe3/jewelry-commerce-intelligence-platform](https://github.com/PaulaCe3/jewelry-commerce-intelligence-platform).

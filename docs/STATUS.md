@@ -1,8 +1,23 @@
 # Estado del Proyecto 01
 
+## Estado vigente — 2026-10-20
+
+Objetivo autorizado: corrección de cinco hallazgos de coherencia y reproducibilidad documental; Aurelia Jewelry es ficticia. Data Engineering no está cerrado. Normalización v1 aprobada con 39 pruebas históricas, sin nueva ejecución en esta etapa documental. Validación semántica abierta; GO CON CONDICIONES para revisión conceptual y NO GO para modelo definitivo/KPIs comerciales.
+
+Completado: actualización de diccionario, registro E10/S06/S07, procedencia/condiciones, matriz de 14 capacidades, decisiones y escenarios A/B/C. Ajustes mínimos de coherencia en README, AGENTS, COPYRIGHT y aviso de vigencia en DATA_AUDIT; PIPELINE permanece intacto. Los bloques anteriores se conservan abajo como historial y no sustituyen este estado vigente.
+
+Confirmado: 95.911 ocurrencias, 90.559 largas, 5.352 cortas, 2.589 excedentes preservados. Fuente declara producto comprado por fila con order_id; sin encabezado posicional. Tres omisiones equivalentes no resueltas. Uso gratuito y atribución publicados; redistribución y otros usos no resueltos. Versión pública actual 2; correspondencia local exacta PROVISIONAL.
+
+Próximo paso: revisión/aprobación documental; después solicitar contrato de extracción, diccionario y reglas monetarias al responsable de la fuente (sin contactos enviados). Prioridad P0: esquema/multiplicidad/importe; P1: identidad/cobertura/permisos; P2: atributos. Escenario B mantiene diagnóstico técnico si no llega información. Ningún escenario se ejecutó.
+
+Verificaciones de esta etapa: véase cierre documental al final. No se realizaron commits, push, instalación, deduplicación, alineación, cálculos comerciales hipotéticos, dashboards o modelos. Los cambios quedan locales pendientes de revisión.
+
+## Historial anterior (estados fechados)
+
+
 Actualizado: 2026-10-19. Preparación pública del portfolio PLATHEL para PaulaCe3.
 
-## Objetivo actual: preparación previa a Git
+### Objetivo histórico al 2026-10-19: preparación previa a Git
 
 Aplicar las correcciones de documentación, privacidad, derechos reservados y exclusiones autorizadas por el usuario. Destino previsto: repositorio público jewelry-commerce-intelligence-platform en la cuenta PaulaCe3. No se inicializó Git ni se crearon commits, remotos o repositorios; la publicación requiere una autorización posterior.
 
@@ -30,11 +45,11 @@ Se verificó igualdad SHA-256 antes/después de los 15 archivos protegidos en da
 
 Las secciones siguientes conservan la evidencia de fases anteriores. Las referencias a «esta fase documental» dentro de esos antecedentes corresponden a la elaboración del diccionario, no a una ejecución actual del pipeline.
 
-## Antecedente: objetivo y resultado semántico
+### Antecedente: objetivo y resultado semántico
 
 Construir diccionario verificable, evidencias semánticas, matriz de viabilidad y propuesta conceptual, según solicitud del usuario, sin tocar el pipeline cerrado. Aurelia Jewelry es ficticia; no se atribuyen datos REES46 a ella. **Documentos construidos; validación semántica parcial y abierta**, no aprobación de métricas comerciales.
 
-## Avance de esta fase
+### Avance de esta fase
 
 - Creados docs/DATA_DICTIONARY.md (13 fichas con nombres técnicos, patrones, vacíos, cardinalidades, ejemplos enmascarados, reglas propuestas, confianza y evidencia), docs/SEMANTIC_VALIDATION.md (registro E01–E09/S01–S05, hipótesis y pendientes) y docs/ANALYTICS_FEASIBILITY.md (matriz de indicadores y modelo conceptual preliminar).
 - Creado docs/semantic_profile.py como apoyo de reproducción: solo lectura, biblioteca estándar, salida de agregados sin IDs individuales. Ejecutado con Python preexistente y -B, código 0.
@@ -45,7 +60,7 @@ Construir diccionario verificable, evidencias semánticas, matriz de viabilidad 
 - Investigación web primaria realizada 2026-10-19: REES46 accesible; Kaggle/ficha/API y rutas legacy no dieron documentación utilizable. Encabezado, moneda, licencia y número público de versión no recuperados. Los períodos de las dos páginas REES46 se contradicen. URLs y afirmaciones respaldadas en SEMANTIC_VALIDATION.md, no se usan encabezados de terceros.
 - Actualizado DECISIONS.md con alcance documental y decisión conservadora; no se registran aprobaciones semánticas inexistentes.
 
-## Verificaciones y pendientes de esta fase
+### Verificaciones y pendientes de esta fase
 
 Comando desde raíz (sustituir python por el intérprete preexistente disponible):
 
@@ -59,11 +74,11 @@ Control documental final ejecutado, código 0: 13 fichas presentes; referencias 
 
 **Recomendación: GO CON CONDICIONES para revisión conceptual exploratoria; NO GO para modelo físico/dimensional definitivo o KPIs comerciales mientras sigan abiertos los bloqueos relevantes.** No es una aprobación del usuario para implementar nada. Próximo paso: obtener encabezado/diccionario y metadatos de la edición, resolver cantidad/precio/moneda y granularidad/repetidos, confirmar identidad/cobertura y licencia con fuente verificable. Las preguntas concretas y criterios están en SEMANTIC_VALIDATION.md.
 
-## Antecedente: cierre de QA de normalización v1
+### Antecedente: cierre de QA de normalización v1
 
 En la fase anterior se emitió **APROBADO para normalización estructural del archivo auditado**, con los criterios de software ejecutados. Las secciones siguientes preservan esa evidencia histórica y sus limitaciones; no constituyen validación semántica ni nuevas ejecuciones de esta fase.
 
-## Archivos y trabajo completado
+### Archivos y trabajo completado
 
 - src/normalize_jewelry.py: rechazo explícito de formatos no admitidos; límite de campo explícito y restaurado; publicación exclusiva de quality.json tras escribir, vaciar y cerrar .quality.json.partial. Contrato JSON y VERSION=1 conservados.
 - tests/test_normalize_jewelry.py: integración real obligatoria, sin skip; caso multilínea exige rechazo; fixture CSV inválido cerrado sigue comprobando conservación.
@@ -76,7 +91,7 @@ En la fase anterior se emitió **APROBADO para normalización estructural del ar
 
 No se modificó data/raw ni data/processed/normalization-v1. No se instalaron dependencias ni se publicaron datos. Solo biblioteca estándar y Python preexistente.
 
-## Ejecuciones y resultados exactos
+### Ejecuciones y resultados exactos
 
 Desde la raíz del proyecto, con un intérprete Python preexistente en el entorno de auditoría:
 
@@ -110,7 +125,7 @@ La primera corrida de desarrollo ejecutó 36 pruebas y terminó con 1 error: la 
 - Se prueba cambio real de un fixture durante normalize y rechazo por hash; nunca sobre data/raw.
 - Ausencia de dataset: se comprueba con raíz simulada que la integración falla y no se omite. El runner parcial anuncia UNIT ONLY - NO FULL APPROVAL. No hay skips en la ejecución completa realizada.
 
-## Integridad, compatibilidad y reproducibilidad
+### Integridad, compatibilidad y reproducibilidad
 
 | Criterio | Resultado verificado |
 |---|---|
@@ -136,7 +151,7 @@ Hashes SHA-256 confirmados independientemente y nuevamente por Get-FileHash:
 
 No cambió el formato de salida: las correcciones son compatibles byte a byte con el baseline. No se forzó alineación corta ni se eliminaron duplicados.
 
-## Medición de recursos
+### Medición de recursos
 
 Python 3.12.14, MSC v.1944 64 bit (AMD64); Windows-11-10.0.26200-SP0. Tres procesos nuevos, dataset de 13.617.148 bytes. Intervalo: llamada normalize completa con hashes y escritura, sin arranque del intérprete ni validación posterior. Memoria: PeakWorkingSetSize del proceso, medida con GetProcessMemoryInfo, no memoria neta exclusiva del algoritmo.
 
@@ -148,7 +163,7 @@ Python 3.12.14, MSC v.1944 64 bit (AMD64); Windows-11-10.0.26200-SP0. Tres proce
 
 El benchmark terminó indicando protected_files_unchanged=true y temporaries_removed=true. No se vació la caché de disco. No se definió un SLA ni un umbral artificial. Resultados dependientes de hardware, caché, sincronización de archivos, antivirus y carga del equipo; no extrapolados a datasets mayores.
 
-## Riesgos residuales y siguiente paso
+### Riesgos residuales y siguiente paso
 
 - Memoria proporcional a cantidad/longitud de textos distintos; medición disponible para este archivo, sin garantía de escala arbitraria.
 - La publicación del reporte requiere enlaces duros; en filesystem incompatible falla sin publicar éxito. No se garantiza durabilidad de records/directorios ante corte de energía; no se ensayaron fallos físicos.
@@ -159,3 +174,24 @@ El benchmark terminó indicando protected_files_unchanged=true y temporaries_rem
 - Diccionario oficial, licencia, semántica de columnas y causa de repetidos siguen pendientes como cuestiones de datos, fuera de este cierre de software.
 
 No quedaron defectos críticos identificados dentro del contrato estructural auditado; las limitaciones anteriores están acotadas y documentadas. Ese cierre habilitó la fase documental posteriormente solicitada y descrita al comienzo de este archivo; no habilita transformaciones semánticas.
+
+## Cierre documental — 2026-10-20
+
+- Revisados git diff y git diff --check: sin errores de whitespace; Git advierte conversión futura LF→CRLF según configuración existente, sin cambiarla.
+- 17 archivos protegidos comparados por SHA-256 antes/después (src, tests, raw, processed, tools y PIPELINE.md): todos idénticos; conjunto sin altas ni bajas. Manifiesto SHA-256 del JSON de rutas relativas y hashes ordenados: fa5f54d43ce4f15d08fc0243335904781c780d3758a12e655cc8bc6898cf2999. Incluye cachés preexistentes; control local, no benchmark portable.
+- Verificados enlaces internos de los 11 documentos nuevos/modificados: sin destinos inexistentes. Fuentes externas reutilizadas de la investigación anterior, sin nueva comprobación de disponibilidad ni captura inmutable.
+- Escaneo de los 11 documentos: sin patrones de rutas personales, URLs firmadas, tokens GitHub, claves privadas o IDs individuales de 19 dígitos. El escaneo por patrones no garantiza ausencia absoluta de secretos.
+- git check-ignore confirma exclusión de jewelry.csv, records.jsonl y quality.json. Solo cambió documentación; no se publicó ningún archivo ni dataset.
+- Sin nueva ejecución de la suite o pipeline: el cambio es documental; las 39 pruebas son evidencia histórica. Sin cálculos comerciales ni evaluación de escenarios ejecutada. Validación semántica abierta y cambios locales pendientes de aprobación.
+
+## Corrección de cinco hallazgos documentales — 2026-10-20
+
+Se corrigieron seis documentos: DATA_SOURCES, SEMANTIC_VALIDATION, DATA_DICTIONARY, ANALYTICS_FEASIBILITY, STATUS y README. Se separaron pendientes vigentes de consultas históricas fechadas; la versión pública actual 2 no se confunde con el mapeo pendiente del identificador interno local 2873760. Atribución y uso gratuito publicados no equivalen a redistribución o explotación comercial irrestricta.
+
+E10 dispone de entradas, pasos, reglas, comando completo de solo lectura y salida ejecutada en SEMANTIC_VALIDATION. Se reprodujo sobre el original con Python preexistente, biblioteca estándar y -B, código 0: 95.911 registros (90.559/5.352), una línea vacía, cero anchuras inesperadas, 2.589 excedentes; cada hipótesis compatible en 5.352 casos e iguales valores en los 5.352. SHA-256 original antes/después idéntico. No se escribieron candidatos ni registros. semantic_profile.py no implementa E10 y no fue modificado ni ejecutado en esta corrección.
+
+La matriz conserva 14 capacidades con un estado único por fila; los perfiles posicional y temporal son alcance técnico de calidad. El objetivo antiguo de preparación previa a Git queda subordinado al historial fechado. README conserva información duradera, sin la nota transitoria de cambios locales.
+
+Verificaciones: bloque Python extraído del comando documentado y reejecutado con resultado idéntico y código 0; git diff revisado y git diff --check sin errores; enlaces internos/ancla E10 y escaneo por patrones sin hallazgos; 17 archivos protegidos con el mismo manifiesto fa5f54d43ce4f15d08fc0243335904781c780d3758a12e655cc8bc6898cf2999. Escenarios A/B/C sin modificaciones; C sigue hipotético y no ejecutado. No se reejecutó suite QA ni pipeline, ni se instalaron dependencias o cambió configuración Git. Comprobaciones documentales no equivalen a cierre semántico.
+
+Dictamen para revisión: APROBADO para un futuro commit exclusivamente documental; los cambios siguen locales y requieren revisión del usuario. Data Engineering y validación semántica siguen abiertos. Persisten los bloqueos P0/P1/P2 del estado vigente. No se creó commit ni se hizo push.

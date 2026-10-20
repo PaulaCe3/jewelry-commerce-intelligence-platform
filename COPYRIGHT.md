@@ -10,7 +10,7 @@ La visibilidad pública permite consultar el proyecto. Las funcionalidades de vi
 
 Este aviso no atribuye a PLATHEL derechos sobre REES46, sus datasets, marcas, documentación ni otros materiales de terceros. Esos materiales pertenecen a sus respectivos titulares y están sujetos a sus propias condiciones. Las referencias y atribuciones no transfieren derechos ni implican afiliación, patrocinio o autorización del proveedor.
 
-No se distribuyen datos originales ni procesados de REES46. La licencia específica de la edición analizada sigue pendiente de verificación, según [DATA_SOURCES.md](docs/DATA_SOURCES.md). Los informes públicos describen metodología, esquema y resultados agregados de auditoría; no incluyen registros de clientes.
+No se distribuyen datos originales ni procesados de REES46. Se verificaron la etiqueta de derechos y las condiciones publicadas de uso gratuito y atribución; el alcance expreso de redistribución y otros usos sigue pendiente, según [DATA_SOURCES.md](docs/DATA_SOURCES.md). Los informes públicos describen metodología, esquema y resultados agregados de auditoría; no incluyen registros de clientes.
 
 Aurelia Jewelry es una empresa ficticia creada para este caso profesional. No es la propietaria del dataset ni representa a la tienda de origen.
 

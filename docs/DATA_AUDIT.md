@@ -1,5 +1,8 @@
 # Primera auditoría técnica de REES46
 
+> Auditoría técnica histórica. Actualización de interpretación al 2026-10-20: prevalecen [SEMANTIC_VALIDATION.md](SEMANTIC_VALIDATION.md) y [DATA_SOURCES.md](DATA_SOURCES.md). S06 confirma granularidad declarada y condiciones publicadas; las posiciones comerciales y la edición local exacta siguen pendientes. Las propuestas antiguas de fact/dimensiones y tipado son antecedentes no aprobados: solo se permite revisión conceptual, sin alineación provisional implementada ni modelo definitivo.
+
+
 Fecha: 2026-10-19. Proyecto 01 de PLATHEL. Aurelia Jewelry es ficticia y no es propietaria de estos datos.
 
 Revisión posterior de esquema y procedencia, misma fecha: véase la sección final. Complementa la primera auditoría y resuelve parcialmente su pendiente de origen mediante evidencia local del ZIP; el diccionario y la licencia continúan sin verificar.
