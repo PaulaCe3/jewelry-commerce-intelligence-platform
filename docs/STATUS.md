@@ -1,6 +1,31 @@
 # Estado del Proyecto 01
 
-## Estado vigente — 2026-10-20
+## Estado vigente — 2026-10-21
+
+Implementadas orquestación local sobre Aurelia v2 y seis vistas/CSV con contrato. Paquete completo publicado localmente tras aceptación independiente desde fuentes. Repetición reconstruye y compara hashes sin sobrescribir. Código y pruebas históricos intactos. [Comandos y garantías](AURELIA_PIPELINE.md).
+
+18 pruebas nuevas en 7.063 s: cero fallos, errores u omisiones. CLI persistido: success, unchanged y verify PASSED; 30 pedidos, 70 artículos, 3 productos, 35 pagos, 5 devoluciones y 7 reembolsos (seed 42), exclusivamente sintéticos.
+
+Pendiente aceptación funcional del usuario e importación real Power BI si se exige ese alcance. Sin commit/push de esta entrega. Data Engineering permanece abierto. REES46 separado y con semántica abierta; persiste la limitación de acceso al hash de su base SQLite retenida, no verificado.
+
+
+### Regresiones y protección ejecutadas — 2026-10-21
+
+| Suite | Pruebas | Tiempo observado | Fallos / errores / omisiones |
+|---|---:|---:|---|
+| tests/run_aurelia_pipeline_suite.py | 18 | 7.063 s | 0 / 0 / 0 |
+| tests/run_aurelia_v2_suite.py | 24 | 6.847 s | 0 / 0 / 0 |
+| tests/run_aurelia_suite.py | 23 | 4.617 s | 0 / 0 / 0 |
+| tests/run_suite.py (completa, datos locales) | 39 | 29.910 s | 0 / 0 / 0 |
+| tests/run_evidence_suite.py (completa, datos locales) | 27 | 63.007 s | 0 / 0 / 0 |
+
+Total 131 pruebas, códigos 0. Comandos: `python -B` seguido de cada ruta de la tabla. Tiempos de esta máquina, no SLA ni benchmark. Las integraciones REES46 usan datos/baseline privados y reconstrucciones temporales; no verifican el hash de la base SQLite retenida inaccesible.
+
+Comparación contra HEAD: 22 archivos históricos versionados en src/tests/tools idénticos byte a byte. SHA-256 del original y ambas salidas oficiales coinciden con los hashes auditados: jewelry.csv 09d8a61644f66cbb9ad8c50f59180978a0995d121196faf25ef28083dd7b84a2; records.jsonl 5eef0df67a63c918b23a5d01627d6debfd88937c7f499e5b4bc25322bbff63e8; quality.json d58407f19d6f3727866ce2ec7674756da7a1a96624f0f5aac74e4c070fefe129.
+
+Los 15 archivos del paquete local están excluidos mediante git check-ignore. git diff --check sin errores; enlaces relativos de los documentos cambiados resuelven; escaneo dirigido sin rutas personales, tokens reconocibles ni claves privadas. Consulta SQLite read-only confirmó (30, 92000, 1400, 90600, 3). Ninguna base o dataset incorporado a los cambios, sin commit/push ni configuración global modificada.
+
+## Antecedente — 2026-10-20
 
 Objetivo autorizado: segunda entrega funcional del Data Warehouse sintético Aurelia, devoluciones físicas y reembolsos financieros separados, sin romper contratos históricos. Empresa ficticia, datos originales PLATHEL; sin REES46 ni Olist en la simulación. Data Engineering sigue abierto.
 

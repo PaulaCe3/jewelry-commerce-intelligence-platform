@@ -100,10 +100,22 @@ La fuente analizada es REES46 Jewelry Store Purchase History. Referencias primar
 
 Siguen pendientes el encabezado oficial de la edición, la unidad física y clave de línea comercial, el papel de ciertos códigos, la moneda, precio unitario frente a importe, persistencia de identidad y causa de las repeticiones. La fuente declara un producto comprado por fila y agrupación por order_id; no confirma sus posiciones locales, cantidad ni pago. La aprobación del pipeline es estructural y no resuelve esos puntos.
 
-La capa SQLite REES46 incluye únicamente SQL técnico de evidencia. La línea Aurelia incorpora un modelo dimensional mínimo exclusivamente sintético. No hay dashboards, modelo comercial REES46, API ni modelos de Machine Learning implementados. El próximo paso es obtener evidencia primaria para resolver las preguntas semánticas y revisar el modelo conceptual; no convertir hipótesis en KPIs de ventas, clientes, rentabilidad o RFM.
+La capa SQLite REES46 incluye únicamente SQL técnico de evidencia. La línea Aurelia incorpora un modelo dimensional mínimo exclusivamente sintético. No hay dashboards, modelo comercial REES46, API ni modelos de Machine Learning implementados. En REES46 sigue pendiente obtener evidencia primaria para resolver las preguntas semánticas; no convertir hipótesis en KPIs de ventas, clientes, rentabilidad o RFM. En Aurelia corresponde la aceptación funcional de la orquestación y del consumo sintético documentados abajo.
 
 ## Derechos y portfolio
 
 Código y materiales originales de **PLATHEL**, con derechos reservados, **sin licencia open source**. Véase [COPYRIGHT.md](COPYRIGHT.md). El aviso no atribuye derechos sobre REES46 ni sobre materiales de terceros.
 
 Repositorio de portfolio: [PaulaCe3/jewelry-commerce-intelligence-platform](https://github.com/PaulaCe3/jewelry-commerce-intelligence-platform).
+
+## Orquestación y consumo sintético
+
+Interfaz local sobre Aurelia v2: generación, carga, conciliación, aceptación independiente y seis vistas/CSV con grano explícito. [Comandos, contratos y límites](docs/AURELIA_PIPELINE.md).
+
+```powershell
+python -B -m src.aurelia.pipeline run --output data/aurelia/runs/seed42-orders30 --seed 42 --orders 30
+python -B -m src.aurelia.pipeline verify --output data/aurelia/runs/seed42-orders30
+python -B tests/run_aurelia_pipeline_suite.py
+```
+
+Sin datasets privados ni dependencias adicionales. Repetición idéntica: unchanged; otro contenido exige destino nuevo. Artefactos excluidos de Git. No hay dashboards ni importación Power BI ejecutada. Data Engineering sigue abierto.
