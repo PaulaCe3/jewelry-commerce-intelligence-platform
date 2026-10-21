@@ -29,6 +29,8 @@ python -B tests/run_aurelia_suite.py
 
 Ejecución completa, contratos, límites y conciliación en [AURELIA_DW.md](docs/AURELIA_DW.md).
 
+La versión aditiva v2 incorpora devoluciones físicas y reembolsos financieros separados, límites acumulados y saldos exclusivamente sintéticos, sin modificar v1 ni migrar sus bases. Contratos, comandos y pruebas en [AURELIA_DW_V2.md](docs/AURELIA_DW_V2.md). Se ejecuta con `python -B -m src.aurelia.v2`; pruebas con `python -B tests/run_aurelia_v2_suite.py`.
+
 ## Capacidades demostradas
 
 - Auditoría reproducible de estructura, vacíos, duplicados, fechas y relaciones entre identificadores candidatos.
