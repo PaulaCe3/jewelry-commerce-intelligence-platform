@@ -1,6 +1,6 @@
 # Aurelia: orquestación local y consumo
 
-Simulación original PLATHEL; Aurelia Jewelry es ficticia. No contiene REES46 ni Olist. Contratos históricos: [v1](AURELIA_DW.md) y [v2](AURELIA_DW_V2.md). Data Engineering permanece abierto.
+Simulación original PLATHEL; Aurelia Jewelry es ficticia. No contiene REES46 ni Olist. Contratos históricos: [v1](AURELIA_DW.md) y [v2](AURELIA_DW_V2.md). **Data Engineering v1 fue aceptado funcionalmente después de la prueba en Power BI**; ver [acta de aceptación](DE_ACCEPTANCE.md). Los apartados posteriores sobre cierre pendiente reflejan el estado previo a esta aceptación.
 
 ## Ejecutar
 

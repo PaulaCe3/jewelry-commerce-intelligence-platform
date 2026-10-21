@@ -2,11 +2,13 @@
 
 ## Estado vigente — 2026-10-21
 
+**DATA ENGINEERING v1 AURELIA: CERRADO Y ACEPTADO FUNCIONALMENTE.** Se importó `analytics_orders.csv` en Power BI Desktop y el usuario confirmó los tres indicadores sintéticos: 920 USD capturados, 14 USD reembolsados y 906 USD netos. Ver [acta de aceptación](DE_ACCEPTANCE.md). La etapa siguiente es Data Analytics / Business Intelligence. Los párrafos históricos siguientes registran el estado anterior al cierre.
+
 Implementadas orquestación local sobre Aurelia v2 y seis vistas/CSV con contrato. Paquete completo publicado localmente tras aceptación independiente desde fuentes. Repetición reconstruye y compara hashes sin sobrescribir. Código y pruebas históricos intactos. [Comandos y garantías](AURELIA_PIPELINE.md).
 
 18 pruebas nuevas en 7.063 s: cero fallos, errores u omisiones. CLI persistido: success, unchanged y verify PASSED; 30 pedidos, 70 artículos, 3 productos, 35 pagos, 5 devoluciones y 7 reembolsos (seed 42), exclusivamente sintéticos.
 
-Pendiente aceptación funcional del usuario e importación real Power BI si se exige ese alcance. Sin commit/push de esta entrega. Data Engineering permanece abierto. REES46 separado y con semántica abierta; persiste la limitación de acceso al hash de su base SQLite retenida, no verificado.
+Estado anterior a la aceptación: la importación real de Power BI estaba pendiente. **Actualización:** aceptación funcional realizada y pipeline publicado en el commit `90986ffe1f31ac903c647c5096bcdad40391af7b`. REES46 sigue separado y con semántica abierta; persiste la limitación de acceso al hash de su base SQLite retenida, no verificado.
 
 
 ### Regresiones y protección ejecutadas — 2026-10-21
