@@ -2,15 +2,13 @@
 
 ## Estado vigente — 2026-10-20
 
-Objetivo autorizado: implementación de capa técnica SQLite sobre records.jsonl y quality.json de normalización v1. No es un modelo analítico comercial. Aurelia Jewelry es ficticia. Data Engineering y validación semántica siguen abiertos; GO CON CONDICIONES para revisión conceptual y NO GO para KPIs/modelo comercial definitivo.
+Objetivo autorizado: primera entrega vertical funcional del Data Warehouse sintético Aurelia Jewelry. Empresa ficticia, datos originales generados por PLATHEL, sin copiar filas ni distribuciones de REES46/Olist. Olist descartado por ahora para el portfolio comercial; ninguna fuente externa incorporada. Data Engineering sigue abierto.
 
-Implementado: src/evidence_sqlite.py con CLI load/query, seis tablas técnicas, validación del contrato v1, reconstrucción del hash fuente, recálculo de calidad, transacción/staging y publicación exclusiva. Idempotencia por comparación lógica completa sin sobrescribir destino distinto. No alinear cortas, deduplicar ni tipar negocios; hipótesis semánticas fuera del núcleo. Nuevos tests/runner separados de la suite v1. Instrucciones en [EVIDENCE_SQLITE.md](EVIDENCE_SQLITE.md).
+Separación implementada: src/aurelia, tests propios y data/aurelia (excluido) para simulación; src/normalize_jewelry.py, src/evidence_sqlite.py y contratos/pruebas REES46 intactos. La validación semántica REES46 sigue abierta: GO CON CONDICIONES conceptual y NO GO para KPIs definitivos de esa fuente. Las medidas sintéticas del nuevo contrato no resuelven esas incertidumbres.
 
-Los datos oficiales conservan 95.911 ocurrencias, 90.559 largas, 5.352 cortas y 2.589 excedentes. Base local prevista: data/evidence/jewelry.sqlite, excluida de Git junto con auxiliares y staging. La base contiene evidencia sensible: no publicar base ni consultas de registros. Código, pruebas anteriores, pipeline y archivos oficiales permanecen intactos; nuevas pruebas usan fixtures temporales y copias de salida independientes.
+Implementado y probado: generador determinista con semilla; contratos pedidos/artículos/pagos; staging y rechazos transaccionales; integración; fact_item/fact_payment con dimensiones mínimas y conciliación por agregaciones independientes. USD y centavos enteros; sin impuestos, descuentos, envío o devoluciones en v1. No ingresos contables, datos personales, dashboards o modelos predictivos.
 
-Persisten bloqueos P0: encabezado por anchura, clave de línea, cantidad/multiplicidad, importe/moneda/estados; P1: identidad/cobertura/permisos y mapeo de edición 2873760; P2: códigos/atributos. La capa permite trazabilidad y calidad, no resuelve esos significados.
-
-Próximo paso: única evaluación funcional de la implementación local según EVIDENCE_SQLITE.md. Sin commit ni push; la autorización actual cubre desarrollo y validación, no publicación. Resultados ejecutados en el cierre de esta etapa al final; las secciones siguientes son antecedentes fechados.
+Próximo paso: única evaluación funcional local con los comandos de [AURELIA_DW.md](AURELIA_DW.md). Después, proponer un incremento contractual de devoluciones/reembolsos, todavía no implementado. No crear commits/push ni publicar datasets/bases bajo esta autorización. Resultados de la ejecución al final; apartados siguientes son antecedentes fechados.
 
 ## Historial anterior (estados fechados)
 
@@ -229,3 +227,32 @@ Nuevos: src/evidence_sqlite.py, tests/test_evidence_sqlite.py, tests/run_evidenc
 Verificaciones finales: git diff --check código 0; enlaces internos y escaneo por patrones sin hallazgos de secretos, IDs individuales o rutas personales; exclusiones de base, journal/WAL/SHM y staging confirmadas con git check-ignore. Git solo muestra los nueve archivos de implementación/documentación anteriores; sin staging, commit, push, configuración global o publicación. No se incorporaron datasets a los archivos publicables. El escaneo por patrones no certifica ausencia absoluta de secretos.
 
 Implementación lista para una única evaluación funcional; sin bloqueos funcionales identificados dentro del alcance probado. Límites: enlaces duros requeridos, memoria proporcional a textos distintos, espacio extra para staging/recarga, operación sin escritores concurrentes, sin prueba física de ACL/disco lleno/corte eléctrico. No se promete durabilidad del directorio ante corte de energía. Data Engineering sigue abierto, igual que validación semántica; no se aprobaron cantidades, ingresos, clientes, KPIs, dashboards o modelos.
+
+## Cierre de primera entrega vertical Aurelia — 2026-10-20
+
+**Resultados ejecutados (no propuestas):**
+
+| Comando (Python preexistente, -B) | Resultado |
+|---|---|
+| tests/run_aurelia_suite.py | 23 pruebas, 3.894 s, código 0; AURELIA_QA tests=23 failures=0 errors=0 skipped=0 |
+| tests/run_suite.py | 39 pruebas v1, 33.140 s, código 0; QA_RESULT tests=39 failures=0 errors=0 skipped=0 |
+| tests/run_evidence_suite.py | 27 pruebas de evidencia, 67.822 s, código 0; EVIDENCE_QA tests=27 failures=0 errors=0 skipped=0 |
+
+Las duraciones reflejan esta máquina, incluyendo ejecuciones simultáneas; no son SLA ni benchmark. El sandbox de Windows denegó crear subdirectorios dentro de temporales; se interrumpieron esas ejecuciones y se ejecutaron las suites con permisos normales autorizados. Se corrigió la captura UTF-8 de subprocess en las nuevas pruebas para no ocultar errores de lectura de stderr. No se modificó código de REES46 para conseguir aprobación.
+
+**Ejecución funcional sintética, semilla 42 y 30 pedidos solicitados:**
+
+- data/aurelia/normal-seed42: 30 pedidos, 70 artículos y 35 pagos; 135 filas staging, status ACCEPTED, cero rechazos; integración y hechos conservan sus conteos. Base nueva data/aurelia/warehouse-normal.sqlite (192.512 bytes).
+- Total contractual de artículos de pedidos PAID: 92.000 centavos USD sintéticos; capturados: 92.000. Son importes de simulación y no ventas observadas/ingresos contables. Los 30 pedidos tienen diferencias de artículos y pagos iguales a cero según su estado.
+- data/aurelia/adverse-seed42: 31 cabeceras, 71 artículos y 35 pagos; 137 staging, 9 motivos de rechazo; status REJECTED y código CLI 1 esperado; cero filas integradas y cero hechos. Base nueva warehouse-adverse.sqlite para trazabilidad de rechazos.
+- Reglas observadas: CURRENCY 1, DUPLICATE_KEY 2, INTEGER_RANGE 1, ITEM_RECONCILIATION 1, ORPHAN 3, PAYMENT_RECONCILIATION 1. Son motivos, no filas distintas; las cabeceras inválidas producen referencias no disponibles para validación.
+- Recarga CLI/API de la base normal: unchanged; hash del destino antes/después idéntico. Dos reconstrucciones independientes y regeneración por semilla comparadas en pruebas. Rechazos, reconstrucción fuente, FK, claves, atomicidad, alteraciones e importes legítimamente iguales cubiertos por la suite.
+- Ejemplo sintético SIM-O-000001: 3 artículos/2 pagos, correcto 3.000/3.000 centavos. El join incorrecto genera 6 filas y sumas 6.000/9.000; SUM(DISTINCT) daría 1.000 en artículos. La prueba negativa exige detectar ambas distorsiones.
+
+**Protección y alcance:** se comprobó igualdad con HEAD de 14 archivos previos de código/pruebas/tools y documentación de pipeline/evidencia; hashes oficiales CSV, records.jsonl y quality.json coinciden con los registrados. Ninguna escritura solicitada sobre data/raw, data/processed o data/evidence. La base persistida data/evidence/jewelry.sqlite devolvió PermissionError al intentar calcular SHA-256, incluso con permisos ampliados: no se afirma verificación de hash de esa base. La suite de evidencia valida reconstrucciones temporales desde salidas oficiales; no sustituye ese control de acceso sobre la base existente. Es una limitación de verificación del entorno, no un fallo funcional demostrado del nuevo Warehouse. No se alteraron ACL ni se forzó su apertura.
+
+Archivos nuevos: src/aurelia/__init__.py, contracts.py, generator.py, warehouse.py y __main__.py; tests/test_aurelia_dw.py y tests/run_aurelia_suite.py; docs/AURELIA_DW.md. Modificados: .gitignore, AGENTS.md, README.md, docs/DECISIONS.md y este STATUS. Ningún archivo preexistente de src/tests modificado. Artefactos normales/adversos locales están excluidos íntegramente, incluidos manifiestos y bases. No se instaló ninguna dependencia ni se descargó dataset.
+
+Límites residuales: un snapshot por base, operación con un solo escritor; límites del generador 6–10.000 pedidos; listas en memoria, sin pretensión de escala de producción; publicación requiere enlaces duros; no se probaron fallos físicos de disco/corte eléctrico ni se garantiza durabilidad del directorio. Generador y Warehouse no son validación de una política fiscal real. El control de la base REES46 existente está limitado por el acceso descrito arriba. El incremento queda local, listo para una evaluación funcional; no se declara terminado Data Engineering.
+
+Verificación de entrega: git diff --check código 0; enlaces internos y escaneo por patrones sin hallazgos; todos los archivos en data/aurelia confirmados ignorados por Git; staging vacío. Cambios limitados a cinco archivos de organización/documentación y ocho archivos nuevos de código/pruebas/documentación Aurelia. No hay datos generados en los candidatos versionables. Los límites de acceso a la base REES46 persistida permanecen explícitos; no se presenta como verificado su hash. No se ejecutaron commit ni push ni se cambió configuración global de Git.

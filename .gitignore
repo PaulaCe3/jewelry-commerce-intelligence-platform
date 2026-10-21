@@ -4,6 +4,10 @@
 /data/processed/**
 !/data/processed/.gitkeep
 
+# Línea Aurelia: datos sintéticos, bases y reportes locales; no publicar artefactos.
+/data/aurelia/**
+.aurelia-*/
+
 # Protección adicional ante copias de datos fuera de sus carpetas locales.
 *.csv
 *.tsv

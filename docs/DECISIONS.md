@@ -59,3 +59,13 @@ Decisión: reconstruir fuente/hash desde raw_text, terminadores y líneas vacía
 Alternativas descartadas: cargar JSON sin validar contenido, usar INSERT OR IGNORE que oculte pérdidas, sobrescribir una base existente o importar el pipeline como validador del cargador. El esquema conserva texto y estados inválidos documentados por v1; un registro inválido preservado no es una entrada JSON incompatible.
 
 Consecuencias: espacio adicional para staging y costo de una carga completa al repetir; memoria proporcional a textos distintos; requiere enlaces duros y uso sin escritores concurrentes. Bases/auxiliares/staging excluidos de Git. No se amplían permisos de datos ni se aprueban KPIs; Data Engineering y validación semántica siguen abiertos. Procedimiento y límites en [EVIDENCE_SQLITE.md](EVIDENCE_SQLITE.md).
+
+## 2026-10-20 — Entrega vertical Aurelia sintética v1
+
+Decisión autorizada: línea independiente de Data Warehouse en src/aurelia y data/aurelia, sin mover ni modificar normalización/evidencia REES46 y sin incorporar Olist. Generador propio determinista; distribuciones y casos contractuales originales, nunca resultados empresariales observados. No se añade licencia open source ni se publica ningún artefacto generado.
+
+Contrato mínimo propio: pedidos, artículos y pagos; USD, centavos enteros, estados finitos, impuestos/descuentos/envío cero, devoluciones fuera de v1. Hechos separados fact_item/fact_payment con fecha del pedido y dimensiones mínimas. No fecha ficticia de pago, asignación de pagos a artículos, SUM(DISTINCT), ingreso contable o información personal.
+
+Política de calidad: cualquier rechazo de registro impide integrar el lote completo; se publica una base explícitamente REJECTED con staging íntegro y motivos, código CLI 1. Fallo operativo/hash/manifiesto impide publicar base nueva. Repetición compara esquema y todas las tablas, sin alterar un destino diferente. Se prefirió snapshot por base a una gestión incremental prematura. Se exige un escritor por destino; no se garantiza durabilidad del directorio ante corte de energía.
+
+Alternativas descartadas: unir artículos y pagos en detalle, deduplicar importes iguales, completar semántica REES46 con simulación o incorporar Olist pese al uso previsto. La demostración negativa de fan-out evidencia por qué las agregaciones independientes son necesarias. Pruebas y comandos en [AURELIA_DW.md](AURELIA_DW.md). Cambios locales para única evaluación funcional; no commit/push ni cierre global de Data Engineering.

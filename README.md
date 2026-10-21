@@ -4,7 +4,7 @@
 
 El proyecto demuestra cómo auditar una fuente de comercio electrónico, conservar su trazabilidad y resolver incertidumbres antes de construir métricas de negocio. El trabajo actual se centra en ingeniería y calidad de datos; sigue en desarrollo.
 
-## Estado del proyecto
+## Línea REES46 — estado del proyecto
 
 | Fase | Estado y alcance |
 |---|---|
@@ -16,6 +16,18 @@ El proyecto demuestra cómo auditar una fuente de comercio electrónico, conserv
 | KPIs comerciales definitivos | **NO GO** hasta resolver los bloqueos pertinentes |
 
 La normalización conserva 95.911 registros: 90.559 filas de 13 campos y 5.352 de 11, incluidas las 2.589 repeticiones excedentes. Las filas cortas permanecen pendientes, sin alineación forzada. Estos números son resultados técnicos de auditoría, no ventas, pedidos ni clientes confirmados.
+
+## Línea independiente: Aurelia Jewelry sintética
+
+Aurelia Jewelry es ficticia. Se implementó una primera entrega vertical con datos sintéticos originales de PLATHEL: contratos de pedidos/artículos/pagos, generador determinista, staging transaccional con rechazos, integración y hechos dimensionales separados. Los importes USD son simulados; no son ventas observadas ni ingresos contables. No se copian datos ni distribuciones de REES46 u Olist. Olist queda descartado por ahora como fuente del portfolio comercial.
+
+Código: src/aurelia; artefactos locales excluidos: data/aurelia. REES46, sus contratos y su evidencia SQLite permanecen independientes. Data Engineering sigue abierto; la validación semántica REES46 no se cierra por disponer de una simulación.
+
+```powershell
+python -B tests/run_aurelia_suite.py
+```
+
+Ejecución completa, contratos, límites y conciliación en [AURELIA_DW.md](docs/AURELIA_DW.md).
 
 ## Capacidades demostradas
 
@@ -86,7 +98,7 @@ La fuente analizada es REES46 Jewelry Store Purchase History. Referencias primar
 
 Siguen pendientes el encabezado oficial de la edición, la unidad física y clave de línea comercial, el papel de ciertos códigos, la moneda, precio unitario frente a importe, persistencia de identidad y causa de las repeticiones. La fuente declara un producto comprado por fila y agrupación por order_id; no confirma sus posiciones locales, cantidad ni pago. La aprobación del pipeline es estructural y no resuelve esos puntos.
 
-La capa SQLite incluye únicamente SQL técnico de evidencia. No hay dashboards, modelo SQL comercial, API ni modelos de Machine Learning implementados. El próximo paso es obtener evidencia primaria para resolver las preguntas semánticas y revisar el modelo conceptual; no convertir hipótesis en KPIs de ventas, clientes, rentabilidad o RFM.
+La capa SQLite REES46 incluye únicamente SQL técnico de evidencia. La línea Aurelia incorpora un modelo dimensional mínimo exclusivamente sintético. No hay dashboards, modelo comercial REES46, API ni modelos de Machine Learning implementados. El próximo paso es obtener evidencia primaria para resolver las preguntas semánticas y revisar el modelo conceptual; no convertir hipótesis en KPIs de ventas, clientes, rentabilidad o RFM.
 
 ## Derechos y portfolio
 
