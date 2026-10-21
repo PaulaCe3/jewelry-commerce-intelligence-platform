@@ -2,6 +2,12 @@
 
 ## Estado vigente — 2026-10-21
 
+### Data Analytics — EDA local para aprobación
+
+Implementado src/aurelia/eda.py sobre las seis exportaciones existentes; contraste celda a celda con SQLite read-only, conciliación por grano, tablas y cinco SVG estáticos. No modifica Warehouse, contratos, generadores ni pruebas históricas. Data Engineering v1 continúa cerrado y aceptado. [Método, indicadores, hallazgos y comandos](AURELIA_EDA.md).
+
+Ejecutados: python -B tests/test_aurelia_eda.py — 8 pruebas en 1.001 s, cero fallos/errores/omisiones; CLI EDA código 0, conciliación PASSED. Reportes bajo data/aurelia/eda/seed42-orders30-v1, excluidos de Git. Capturado 920 USD, reembolso completado 14 USD, saldo 906 USD; solo simulación. Reproducciones independientes idénticas y hashes de entrada estables. Sin dashboard/ML, commit o push. Pendiente revisión y aprobación funcional EDA.
+
 **DATA ENGINEERING v1 AURELIA: CERRADO Y ACEPTADO FUNCIONALMENTE.** Se importó `analytics_orders.csv` en Power BI Desktop y el usuario confirmó los tres indicadores sintéticos: 920 USD capturados, 14 USD reembolsados y 906 USD netos. Ver [acta de aceptación](DE_ACCEPTANCE.md). La etapa siguiente es Data Analytics / Business Intelligence. Los párrafos históricos siguientes registran el estado anterior al cierre.
 
 Implementadas orquestación local sobre Aurelia v2 y seis vistas/CSV con contrato. Paquete completo publicado localmente tras aceptación independiente desde fuentes. Repetición reconstruye y compara hashes sin sobrescribir. Código y pruebas históricos intactos. [Comandos y garantías](AURELIA_PIPELINE.md).

@@ -81,3 +81,7 @@ Hechos separados y agregación por pago/artículo/pedido, sin fan-out ni SUM(DIS
 ## 2026-10-21 — Orquestación y consumo Aurelia
 
 Implementación aditiva autorizada sobre v2 sin modificar contratos, código o pruebas históricos. Paquete snapshot con seis vistas/CSV, aceptación desde fuentes, bloqueo de escritor cooperante y publicación local completa. Repetición reconstruye y compara todos los hashes. Productos es agregado, no dimensión; granularidades separadas, sin asignar reembolsos a productos ni inventar captura temporal. Oráculo Python independiente de los SELECT. Sin ledger, dashboard ni dependencias adicionales. Coste: reconstrucción completa; reproducibilidad entre runtimes y durabilidad ante corte de energía no garantizadas. [Garantías y límites](AURELIA_PIPELINE.md). Cambios locales para aceptación; sin commit/push ni cierre global de Data Engineering.
+
+## 2026-10-21 — EDA sintético independiente
+
+Autorizado análisis descriptivo desde seis exportaciones existentes, sin nuevas funcionalidades DE ni alterar código histórico. Biblioteca estándar, tablas CSV/JSON y gráficos SVG estáticos en data/aurelia/eda excluido. Granos separados y comprobación con vistas SQLite read-only; sin joins de hechos ni distribución de reembolsos a productos. Se documentan fórmulas, poblaciones ALL/PAID y limitaciones sintéticas. [EDA](AURELIA_EDA.md). Ocho pruebas ejecutadas con integración local requerida, sin skips; resultados locales para aprobación, sin commit/push.
